@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# ElimaLabs website
 
-## Getting Started
+Next.js 16.4.2 / React 19.3.0 company website. No added dependencies.
 
-First, run the development server:
+## Local development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Run `npm.cmd run dev` on Windows, then open the Local URL printed in the terminal. Use `npm.cmd run build` for production validation and `npm.cmd run start` to serve that build.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Launch configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy `.env.example` to `.env.local` and set `SITE_URL` to the final public HTTPS origin. Rebuild after changing this value. Until configured, pages are noindex, robots disallows crawling, and the sitemap contains no public URLs. Public deployment and Search Console setup are not yet performed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Content and design
 
-## Learn More
+- Edit `app/content.ts` for services, case studies, technology stacks, and contact constants.
+- Page routes are Home, Services (four detail pages), Work (three detail pages), About, and Contact.
+- Shared wordmark, illustrations and sections are in `app/components.tsx`; styling is in `app/globals.css`.
+- Contact uses email and WhatsApp links; there is no form backend or analytics tracking.
+- Supplied project screenshots are integrated in `app/project-media.tsx` from `public/projects/`, following the user's explicit request to include them. Client company names remain withheld. Screenshot branding is retained as supplied.
+- CRM service includes a screenshot-style concept in `app/crm-concept.tsx`, explicitly labeled sample data and not a client case study.
 
-To learn more about Next.js, take a look at the following resources:
+## Routing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Cache Components and partial prefetching from the starter were disabled because this brochure site uses a closed set of statically generated routes. `dynamicParams = false` ensures unknown service and project URLs return HTTP 404 rather than a streamed not-found response with HTTP 200.
